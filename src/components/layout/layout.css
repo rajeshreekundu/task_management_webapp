@@ -1,0 +1,40 @@
+/*  */
+.layout_wrapper {
+  height: 100%;
+}
+
+.navbar--wrap {
+  padding: 0 2rem;
+  text-align: left;
+  background-color: #266876;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+}
+.brand_wrap {
+  display: flex;
+  align-items: center;
+}
+/* Main Area */
+.main_area {
+  height: 100%;
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar_wrap {
+  height: var(--full-100);
+  background-color: var(--dark-color);
+  width: 300px;
+  padding: 1rem;
+}
+
+/* Main Content */
+.main_content {
+  height: 100%;
+  width: calc(100% - 300px);
+  padding: 1rem;
+}
+h1 {
+}
