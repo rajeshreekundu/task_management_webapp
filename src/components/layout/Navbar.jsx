@@ -1,17 +1,17 @@
 import logo from "@/assets/images/logo.svg";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import Button from "@mui/material/Button";
+import IconButton from '@mui/material/IconButton';
 
-function Navbar() {
+function Navbar(props) {
   return (
     <div className="navbar--wrap">
       <div className="brand_wrap">
         <img src={logo} alt="" className="logo_cls" />
       </div>
 
-      <Button>
+      <IconButton aria-label="Add" size="small" onClick={props.openDialog}>
         <AddCircleIcon titleAccess="Add Task" />
-      </Button>
+      </IconButton>
     </div>
   );
 }

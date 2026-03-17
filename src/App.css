@@ -35,14 +35,14 @@
 
 /* Color Variable */
 
-:root{
+:root {
   --full-100: 100%;
   /* --theme-green-color : #267669; */
-  --theme-green-color : #267671;
-  --theme-yellow-color : #E1C13F;
-  
+  --theme-green-color: #267671;
+  --theme-yellow-color: #e1c13f;
+
   --dark-bg: #242424;
-  --light-text: #ffffffde;;
+  --light-text: #ffffffde;
   --dark-color: #313131;
 
   /* --text-- */
@@ -52,8 +52,7 @@
 
   height: var(--full-100);
   background-color: var(--dark-bg);
-  color: var(--light-text)
-  
+  color: var(--light-text);
 }
 
 #root {
@@ -65,4 +64,15 @@ body {
   margin: 0;
   width: var(--full-100);
   height: var(--full-100);
+}
+.MuiButtonBase-root.MuiButton-colorPrimary {
+  background: #e1c13f;
+  color: #266876;
+  padding-block: 7px;
+  text-transform: capitalize;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  /* box-shadow: none; */
+  width: 100%;
 }

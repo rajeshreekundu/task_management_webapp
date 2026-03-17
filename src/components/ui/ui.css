@@ -1,6 +1,6 @@
 .card {
   width: 320px;
-  background-color: #131313;
+  background-color: var(--dark-color);
   border-radius: 12px;
   padding: 16px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
@@ -57,6 +57,11 @@
   margin-top: 8px;
   font-size: 14px;
   color: var(--card-text-color);
+  /*  */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .card-checkbox {
@@ -74,4 +79,10 @@
 
 .action-icon:hover {
   transform: scale(1.2);
+}
+
+.MuiDialogTitle-root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
