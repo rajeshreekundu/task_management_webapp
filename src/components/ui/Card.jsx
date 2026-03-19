@@ -3,7 +3,16 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 
-const Card = ({task}) => {
+const Card = ({ task, onDelete, onEdit }) => {
+  // const handleClick = (e) => {
+  //   e.currentTarget.blur();
+  //   taskEdit(task);
+  //   console.log(e);
+  // };
+  const time = new Date(task.createdAt).toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   return (
     <>
       <div className="card">
@@ -14,12 +23,22 @@ const Card = ({task}) => {
               fontSize="small"
               titleAccess="Edit Task"
               className="action-icon"
+              onClick={() => {
+                onEdit(task);
+                // console.log(e.target);
+
+                // const btn = e.currentTarget;
+                // setTimeout(() => btn.blur(), 0);
+              }}
             />
 
             <DeleteIcon
               fontSize="small"
               titleAccess="Delete Task"
               className="action-icon"
+              onClick={()=>{
+                onDelete(task.id)
+              }}
             />
           </div>
         </div>
@@ -30,13 +49,18 @@ const Card = ({task}) => {
             <h3 className="card-title">
               {/* Complete React Project */}
               {task.title}
-              </h3>
+            </h3>
           </div>
           <p className="card-description">
             {/* Finish building the user management dashboard with proper state
             handling. */}
             {task.note}
           </p>
+        </div>
+
+        <div className="card-footer">
+          <p className="task-status">Status: </p>
+          <p className="create-time">{time}</p>
         </div>
       </div>
     </>

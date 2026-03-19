@@ -10,7 +10,13 @@ import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const ModalUI = (props) => {
   return (
-    <Dialog className={props.className} open={props.open} onClose={props.onClose}>
+    <Dialog
+      disableAutoFocus
+      disableEnforceFocus
+      className={props.className}
+      open={props.open}
+      onClose={props.onClose}
+    >
       <DialogTitle>
         {props.mode === "edit" ? "Edit Task" : "Add Task"}
 

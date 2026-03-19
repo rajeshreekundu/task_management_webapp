@@ -3,26 +3,44 @@ import MainLayout from "../components/layout/MainLayout";
 import TaskForm from "../components/tasks/TaskForm";
 import ModalUI from "../components/ui/ModalUI";
 import "./pages.css";
-import Card from "../components/ui/card";
 
 const Dashboard = () => {
-  const [tasks, setTasks] = useState(() => {
-    const getTask = localStorage.getItem("tasks");
-    return getTask ? JSON.parse(getTask) : [];
-  });
   const [openModal, setOpenModal] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [mode, setMode] = useState("add");
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem("tasks");
+    try {
+      const parsed = JSON.parse(savedTasks);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
+  });
+
   const handleChange = () => {
+    setMode('add')
+    setSelectedTask(null);
     setOpenModal(true);
   };
 
   const handleAddTask = (formData) => {
-    const newTask = {
-      id: Date.now(),
-      ...formData,
-      completed: false,
-    };
-    setTasks([...tasks, newTask]);
-    setOpenModal(false);
+    if (mode === "edit") {
+      const updateTasks = tasks.map((task) => {
+        return task.id === selectedTask.id ? { ...task, ...formData } : task;
+      });
+      setTasks(updateTasks);
+    } else {
+      const newTask = {
+        id: Date.now(),
+        ...formData,
+        completed: false,
+        createdAt: Date.now(),
+      };
+      // setTasks([...tasks, newTask]);
+      setTasks((prev) => [...prev, newTask]);
+    }
+    handleClose();
     console.log(tasks);
   };
 
@@ -30,43 +48,47 @@ const Dashboard = () => {
     setOpenModal(false);
   };
 
-  // useEffect(() => {
-
-  // },[]);
-
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
 
+  const handleDeletTask = (idx) => {
+    const updateDeleteTask = tasks.filter((ele) => {
+      return ele.id !== idx;
+    });
+    setTasks(updateDeleteTask);
+    console.log(`${idx} no task deleted`);
+  };
+
+  const handleEditTask = (task) => {
+    console.log(`${task} no task edited`);
+
+    setSelectedTask(task);
+    setMode("edit");
+    setOpenModal(true);
+  };
+
   return (
     <div className="dashboard">
-      <MainLayout openDialog={handleChange} tasks={tasks} />
-      {/* <h4>length {tasks.length}</h4> */}
-      {tasks.length >= 1 ? (
-        <div>
-          {tasks.map((ele, idx) => {
-            return (
-              <>
-                {/* <div key={idx}>
-                <h2>Title: {ele.title}</h2>
-                <p>Deatils: {ele.note}</p>
-                <p>category: {ele.category}</p>
-              </div> */}
-                {/* <Card task={ele.title} {ele.note} key={ele.idx}/> */}
-              </>
-            );
-          })}
-        </div>
-      ) : (
-        <p>No data Found</p>
-      )}
-
+      <MainLayout
+        openDialog={handleChange}
+        tasks={tasks}
+        taskDelete={handleDeletTask}
+        editTask={handleEditTask}
+        // updateTask= {updateTask}
+      />
       <ModalUI
         className="task_modal"
         open={openModal}
         onClose={handleClose}
-        mode
-        content={<TaskForm onSubmitTask={handleAddTask} />}
+        mode={mode}
+        content={
+          <TaskForm
+            onSubmitTask={handleAddTask}
+            selectedTask={selectedTask}
+            mode={mode}
+          />
+        }
       />
     </div>
   );

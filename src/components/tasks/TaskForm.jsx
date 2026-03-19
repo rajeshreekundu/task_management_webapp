@@ -12,21 +12,33 @@ import {
 } from "@mui/material";
 import "./task.css";
 import MyModal from "../ui/ModalUI";
-import { useState } from "react";
-import { Category } from "@mui/icons-material";
+import { useEffect, useState } from "react";
+import { Category, ModeEditOutlineSharp } from "@mui/icons-material";
 
-const TaskForm = ({ onSubmitTask }) => {
+const TaskForm = ({ onSubmitTask, selectedTask, mode}) => {
   const initialFormData = {
     title: "",
     category: "health",
     note: "",
   };
-  const [formData, setformData] = useState(initialFormData);
-  // const [tasks, setTasks] = useState([]);
+  const [formData, setFormData] = useState(initialFormData);
+
+
+  useEffect(() => {
+  if (mode === 'edit' && selectedTask) {
+    setFormData({
+      title: selectedTask.title || "",
+      category: selectedTask.category || "health",
+      note: selectedTask.note || "",
+    });
+  }
+}, [selectedTask, mode]);
+
+
 
   const inputHandleChange = (e) => {
     const { name, value } = e.target;
-    setformData((prev) => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -35,11 +47,11 @@ const TaskForm = ({ onSubmitTask }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSubmitTask(formData);    
+    onSubmitTask(formData);  
 
 
     // setTasks([...tasks, formData]);
-    setformData(initialFormData);
+    setFormData(initialFormData);
     // console.log(tasks);
   };
 
@@ -52,33 +64,30 @@ const TaskForm = ({ onSubmitTask }) => {
             variant="outlined"
             required
             name="title"
-            value={formData.title}
-            onChange={(e) => {
-              inputHandleChange(e);
-            }}
+            value={formData.title || ""}
+            onChange={inputHandleChange}
+            // onChange={(e) => {
+            //   inputHandleChange(e);
+            // }}
           />
         </FormControl>
 
         <FormControl component="fieldset" required margin="normal">
           <FormLabel>Task Category</FormLabel>
-          <RadioGroup row  value={formData.category}>
+          <RadioGroup row  value={formData.category || ""}>
             <FormControlLabel
               value="health"
               control={<Radio />}
               label="Health"
               name="category"
-              onChange={(e) => {
-                inputHandleChange(e);
-              }}
+              onChange={inputHandleChange}
             />
             <FormControlLabel
               value="work"
               control={<Radio />}
               label="Work Life"
               name="category"
-              onChange={(e) => {
-                inputHandleChange(e);
-              }}
+              onChange={inputHandleChange}
             />
           </RadioGroup>
         </FormControl>
@@ -91,10 +100,12 @@ const TaskForm = ({ onSubmitTask }) => {
             multiline
             rows={3}
             name="note"
-            value={formData.note}
-            onChange={(e) => {
-              inputHandleChange(e);
-            }}
+            // value={formData.note}
+            value={formData.note || ""}
+            // onChange={(e) => {
+            //   inputHandleChange(e);
+            // }}
+            onChange={inputHandleChange}
           />
         </FormControl>
         <Button
@@ -104,8 +115,8 @@ const TaskForm = ({ onSubmitTask }) => {
           fullWidth
           sx={{ mt: 2 }}
         >
-          {/* {props.mode === "edit" ? "Update Task" : "Add Task"} */}
-          Add task
+          {mode === "edit" ? "Update Task" : "Add Task"}
+          {/* Add task */}
         </Button>
       </form>      
     </>

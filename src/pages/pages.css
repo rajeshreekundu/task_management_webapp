@@ -9,3 +9,6 @@
     padding-block: 12px;
     border-bottom: 1px solid #d6d6d6
 }
+.MuiDialog-root.task_modal .MuiDialogContent-root{
+    padding: 24px;
+}
