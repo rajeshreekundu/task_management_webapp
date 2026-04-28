@@ -2,26 +2,61 @@ import "./ui.css";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
+import { useState } from "react";
 
-const Card = ({ task, onDelete, onEdit }) => {
+const Card = ({ task, onDelete, onEdit, handleCompleteTask  }) => {
   // const handleClick = (e) => {
   //   e.currentTarget.blur();
   //   taskEdit(task);
   //   console.log(e);
   // };
+  const [check, setCheck] = useState();
   const time = new Date(task.createdAt).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  //
+//   const handleCompleteTask = (index) => {
+//   const updatedTasks = tasks.map((task, i) => {
+//     if (i === index) {
+//       return {
+//         ...task,
+//         isCompleted: true   // ✅ update properly
+//       };
+//     }
+//     return task;
+//   });
+
+//   setTasks(updatedTasks);   // ✅ new array → re-render
+// };
+
+  const getTaskStatus = (task) => {
+    const now = Date.now();
+    const diff = now - task.createdAt;
+
+    const hours24 = 24 * 60 * 60 * 1000;
+
+    if (task.isCompleted) {
+      return "Done ✅";
+    } else if (diff > hours24) {
+      return "Expired ⛔";
+    } else {
+      return "Pending ⏳";
+    }
+  };
+  const isDisabled = (task) => {
+    const expired = Date.now() - task.createdAt > 24 * 60 * 60 * 1000;
+    return expired || task.isCompleted;
+  };
   return (
     <>
-      <div className="card">
+      {/* {check ? ( */}
+      <div className={`card ${isDisabled(task) ? "disabled" : ""}`}>
         <div className="card-header">
           <span className="card-category">{task.category}</span>
           <div className="card-actions">
-            <EditIcon
-              fontSize="small"
-              titleAccess="Edit Task"
+            <button
               className="action-icon"
               onClick={() => {
                 onEdit(task);
@@ -30,22 +65,36 @@ const Card = ({ task, onDelete, onEdit }) => {
                 // const btn = e.currentTarget;
                 // setTimeout(() => btn.blur(), 0);
               }}
-            />
-
-            <DeleteIcon
-              fontSize="small"
-              titleAccess="Delete Task"
+              disabled={isDisabled(task)}
+            >
+              <EditIcon fontSize="small" titleAccess="Edit Task" />
+            </button>
+            <button
               className="action-icon"
-              onClick={()=>{
-                onDelete(task.id)
+              onClick={() => {
+                onDelete(task.id);
               }}
-            />
+              disabled={isDisabled(task)}
+            >
+              <DeleteIcon fontSize="small" titleAccess="Delete Task" />
+            </button>
           </div>
         </div>
 
         <div className="card-body">
           <div className="card-title-row">
-            <input type="checkbox" className="card-checkbox" />
+            <input
+              type="checkbox"
+              className="card-checkbox"
+              value={check}
+              checked={task.isCompleted}
+              onChange={(e) => {
+                console.log(check);
+                handleCompleteTask(task.id)
+                // setCheck(e.target.checked);
+                // // console.log(e.target.checked);
+              }}
+            />
             <h3 className="card-title">
               {/* Complete React Project */}
               {task.title}
@@ -59,10 +108,24 @@ const Card = ({ task, onDelete, onEdit }) => {
         </div>
 
         <div className="card-footer">
-          <p className="task-status">Status: </p>
+          <div>
+            <p>
+              Days:{" "}
+              {task.days?.length
+                ? task.days.map((day) => day.charAt(0)).join(", ")
+                : "No days selected"}
+            </p>
+          </div>
+          <p className="task-status">
+            Status: {/* {check ? "Done" : "Not Done"} */}
+            {getTaskStatus(task)}
+          </p>
           <p className="create-time">{time}</p>
         </div>
       </div>
+      {/* ) : (
+        <p></p>
+      )} */}
     </>
   );
 };

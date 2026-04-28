@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import TaskForm from "../components/tasks/TaskForm";
 import ModalUI from "../components/ui/ModalUI";
@@ -18,10 +18,21 @@ const Dashboard = () => {
     }
   });
 
+  const [value, setValue] = useState(new Date());
+  const today = new Date().toLocaleString("en-US", { weekday: "long" }); // [output e.g --- Monday]
+  const [selectedDay, setSelectedDay] = useState(today);
+
+  const onChange = (e) => {
+    console.log("clicked", value);
+    console.log(setValue(e.target.value));
+    setValue(value);
+  };
+
   const handleChange = () => {
-    setMode('add')
-    setSelectedTask(null);
+    setMode("add");
+    setSelectedTask(null); //reset
     setOpenModal(true);
+    console.log(React.version);
   };
 
   const handleAddTask = (formData) => {
@@ -34,8 +45,9 @@ const Dashboard = () => {
       const newTask = {
         id: Date.now(),
         ...formData,
-        completed: false,
+        isCompleted: false,
         createdAt: Date.now(),
+        // isActive: true,
       };
       // setTasks([...tasks, newTask]);
       setTasks((prev) => [...prev, newTask]);
@@ -46,6 +58,8 @@ const Dashboard = () => {
 
   const handleClose = () => {
     setOpenModal(false);
+    setSelectedTask(null);
+    setMode("add");
   };
 
   useEffect(() => {
@@ -68,6 +82,18 @@ const Dashboard = () => {
     setOpenModal(true);
   };
 
+  const handleCompleteTask = (id) => {
+  const updatedTasks = tasks.map((task) =>
+    task.id === id
+      ? { ...task, isCompleted: !task.isCompleted }
+      : task
+  );
+
+  setTasks(updatedTasks);
+};
+
+
+
   return (
     <div className="dashboard">
       <MainLayout
@@ -75,6 +101,11 @@ const Dashboard = () => {
         tasks={tasks}
         taskDelete={handleDeletTask}
         editTask={handleEditTask}
+        value={value}
+        onChange={onChange}
+        selectedDay={selectedDay}
+        setSelectedDay={setSelectedDay}
+        handleCompleteTask={handleCompleteTask}
         // updateTask= {updateTask}
       />
       <ModalUI

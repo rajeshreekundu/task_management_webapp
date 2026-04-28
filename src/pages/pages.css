@@ -4,11 +4,13 @@
 }
 .MuiDialog-root.task_modal .MuiPaper-root.MuiDialog-paper{
     max-width: 500px;
+    min-width: 500px;
 }
 .MuiDialog-root.task_modal .MuiTypography-root.MuiDialogTitle-root{
     padding-block: 12px;
     border-bottom: 1px solid #d6d6d6
 }
 .MuiDialog-root.task_modal .MuiDialogContent-root{
-    padding: 24px;
+    padding-block: 24px;
+    padding-inline: 24px 20px;
 }

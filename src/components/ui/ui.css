@@ -5,6 +5,7 @@
   padding: 16px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease;
+  position: relative;
 }
 
 .card:hover {
@@ -57,7 +58,7 @@
   margin-top: 8px;
   font-size: 14px;
   color: var(--card-text-color);
-  /*  */
+  /*---*/
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -74,6 +75,9 @@
   margin-left: 8px;
   transition: transform 0.2s ease;
   color: var(--action-icon-color);
+  background-color: transparent;
+  box-shadow: none;
+  border: 0;
 }
 
 .action-icon:hover {
@@ -89,6 +93,10 @@
   flex-wrap: wrap;
   gap: 5px;
 }
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 .task-status{
   margin: 0;
 }
@@ -102,4 +110,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.card.Mui-disabled::after {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: #a2ffca45;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 12px;
 }
