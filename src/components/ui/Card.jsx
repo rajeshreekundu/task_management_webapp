@@ -4,50 +4,44 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 
-const Card = ({ task, onDelete, onEdit, handleCompleteTask  }) => {
-  // const handleClick = (e) => {
-  //   e.currentTarget.blur();
-  //   taskEdit(task);
-  //   console.log(e);
-  // };
+const Card = ({
+  task,
+  onDelete,
+  onEdit,
+  handleCompleteTask,
+  selectedDay,
+  onToggle,
+}) => {
   const [check, setCheck] = useState();
   const time = new Date(task.createdAt).toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
   });
 
-  //
-//   const handleCompleteTask = (index) => {
-//   const updatedTasks = tasks.map((task, i) => {
-//     if (i === index) {
-//       return {
-//         ...task,
-//         isCompleted: true   // ✅ update properly
-//       };
-//     }
-//     return task;
-//   });
 
-//   setTasks(updatedTasks);   // ✅ new array → re-render
-// };
+  //helper function
+  const isExpired = (task) => {
+    const diff = Date.now() - task.createdAt;
+    return diff > 24 * 60 * 60 * 1000;
+  };
 
   const getTaskStatus = (task) => {
-    const now = Date.now();
-    const diff = now - task.createdAt;
+    // const now = Date.now();
+    // const diff = now - task.createdAt;
 
-    const hours24 = 24 * 60 * 60 * 1000;
+    // const hours24 = 24 * 60 * 60 * 1000;
 
-    if (task.isCompleted) {
+    if (task.completedDays?.[selectedDay]) {
       return "Done ✅";
-    } else if (diff > hours24) {
+    } else if (isExpired(task)) {
       return "Expired ⛔";
     } else {
       return "Pending ⏳";
     }
   };
   const isDisabled = (task) => {
-    const expired = Date.now() - task.createdAt > 24 * 60 * 60 * 1000;
-    return expired || task.isCompleted;
+    const expired = isExpired(task);
+    return expired;
   };
   return (
     <>
@@ -86,14 +80,8 @@ const Card = ({ task, onDelete, onEdit, handleCompleteTask  }) => {
             <input
               type="checkbox"
               className="card-checkbox"
-              value={check}
-              checked={task.isCompleted}
-              onChange={(e) => {
-                console.log(check);
-                handleCompleteTask(task.id)
-                // setCheck(e.target.checked);
-                // // console.log(e.target.checked);
-              }}
+              checked={task.completedDays?.[selectedDay] || false}
+              onChange={() => handleCompleteTask(task.id, selectedDay)}
             />
             <h3 className="card-title">
               {/* Complete React Project */}

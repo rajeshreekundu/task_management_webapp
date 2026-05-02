@@ -45,9 +45,10 @@ const Dashboard = () => {
       const newTask = {
         id: Date.now(),
         ...formData,
-        isCompleted: false,
+        // isCompleted: false,
+        completedDays: {},
         createdAt: Date.now(),
-        // isActive: true,
+        isActive: true,
       };
       // setTasks([...tasks, newTask]);
       setTasks((prev) => [...prev, newTask]);
@@ -82,12 +83,22 @@ const Dashboard = () => {
     setOpenModal(true);
   };
 
-  const handleCompleteTask = (id) => {
-  const updatedTasks = tasks.map((task) =>
-    task.id === id
-      ? { ...task, isCompleted: !task.isCompleted }
-      : task
-  );
+  const handleCompleteTask = (id, selectedDay) => {
+  const updatedTasks = tasks.map((task) =>{
+    // task.id === id ? 
+    //   { ...task, }
+    //   : task
+    if(task.id === id){
+      return{
+        ...task,
+        completedDays:{
+          ...task.completedDays,
+          [selectedDay]: !task.completedDays?.[selectedDay],
+        },
+      }
+    }
+    return task;
+  });
 
   setTasks(updatedTasks);
 };

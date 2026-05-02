@@ -65,6 +65,8 @@ const MainLayout = ({
                     onDelete={taskDelete}
                     onEdit={editTask}
                     handleCompleteTask={handleCompleteTask}
+                    selectedDay={selectedDay}
+                    on
                     // onEdit={() => editTask(ele, idx)}
                   />
                 );
