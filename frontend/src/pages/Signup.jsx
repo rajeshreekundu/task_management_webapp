@@ -14,7 +14,7 @@ const Signup = () => {
           <FormField placeholder="Password" type="password" />
           <button className="auth-butn">Register</button>
         </form>
-        <p>
+        <p className="auth-botom-text">
           Already have an account? <Link to="/">Login</Link>
         </p>
       </div>

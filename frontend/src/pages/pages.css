@@ -23,6 +23,10 @@
 }
 .auth-content {
   width: var(--full-100);
+  border-radius: 3px;
+  padding: 2rem;
+  background-color: #171717;
+  box-shadow: 0 0 20px #0000006e;
 }
 .auth-form {
   width: var(--full-100);
@@ -30,8 +34,8 @@
   background-color: #313131;
   border-radius: 5px;
 }
-.auth-form h2{
-    color: var(--text-color);
+.auth-form h2 {
+  color: var(--text-color);
 }
 .auth-butn {
   width: var(--full-100);
@@ -44,18 +48,31 @@
   font-weight: 600;
   font-size: 0.938rem;
 }
-
+.auth-botom-text {
+  color: var(--text-color);
+}
+.auth-botom-text a {
+  color: var(--theme-green-color);
+  font-weight: 500;
+}
 @media screen and (max-width: 768px) {
   .MuiDialog-root.task_modal .MuiPaper-root.MuiDialog-paper {
     max-width: 95%;
     min-width: 95%;
   }
-  .MuiDialog-root.task_modal .MuiDialogContent-root{
+  .MuiDialog-root.task_modal .MuiDialogContent-root {
     padding-inline: 20px;
   }
   .auth-page {
     width: var(--full-100);
     padding-inline: 2rem;
     box-sizing: border-box;
+  }
+  .auth-content {
+    width: var(--full-100);
+    border-radius: 3px;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
   }
 }

@@ -139,3 +139,12 @@
   border-radius: 3px;
   border: 1px solid #eee;
 }
+.input-cls:focus-visible {
+    outline: 0;
+    border: 1px solid #267671;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
