@@ -1,0 +1,61 @@
+.dashboard {
+  width: var(--full-100);
+}
+.MuiDialog-root.task_modal .MuiPaper-root.MuiDialog-paper {
+  max-width: 500px;
+  min-width: 500px;
+}
+.MuiDialog-root.task_modal .MuiTypography-root.MuiDialogTitle-root {
+  padding-block: 12px;
+  border-bottom: 1px solid #d6d6d6;
+}
+.MuiDialog-root.task_modal .MuiDialogContent-root {
+  padding-block: 24px;
+  padding-inline: 24px 20px;
+}
+/* AuthPage */
+.auth-page {
+  width: 25%;
+  height: var(--full-100);
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+.auth-content {
+  width: var(--full-100);
+}
+.auth-form {
+  width: var(--full-100);
+  padding: 6rem 4rem;
+  background-color: #313131;
+  border-radius: 5px;
+}
+.auth-form h2{
+    color: var(--text-color);
+}
+.auth-butn {
+  width: var(--full-100);
+  padding: 9px 12px;
+  border-radius: 3px;
+  border: 0;
+  cursor: pointer;
+  background: var(--theme-green-color);
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 0.938rem;
+}
+
+@media screen and (max-width: 768px) {
+  .MuiDialog-root.task_modal .MuiPaper-root.MuiDialog-paper {
+    max-width: 95%;
+    min-width: 95%;
+  }
+  .MuiDialog-root.task_modal .MuiDialogContent-root{
+    padding-inline: 20px;
+  }
+  .auth-page {
+    width: var(--full-100);
+    padding-inline: 2rem;
+    box-sizing: border-box;
+  }
+}
