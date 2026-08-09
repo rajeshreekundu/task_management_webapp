@@ -1,6 +1,8 @@
 # Backend
 **/.env
 **/node_modules/
+**/docs.md
+**/backend-docs.md
 
 # # Frontend
 # frontend/node_modules/

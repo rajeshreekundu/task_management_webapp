@@ -10,15 +10,6 @@ const Dashboard = () => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [mode, setMode] = useState("add");
   const { tasks, setTasks, addTask, deleteTask} = useTask();
-  // const [tasks, setTasks] = useState(() => {
-  //   const savedTasks = localStorage.getItem("tasks");
-  //   try {
-  //     const parsed = JSON.parse(savedTasks);
-  //     return Array.isArray(parsed) ? parsed : [];
-  //   } catch {
-  //     return [];
-  //   }
-  // });
 
   const [value, setValue] = useState(new Date());
   const today = new Date().toLocaleString("en-US", { weekday: "long" }); // [output e.g --- Monday]
@@ -37,45 +28,11 @@ const Dashboard = () => {
     console.log(React.version);
   };
 
-  // const handleAddTask = (formData) => {
-  //   if (mode === "edit") {
-  //     const updateTasks = tasks.map((task) => {
-  //       return task.id === selectedTask.id ? { ...task, ...formData } : task;
-  //     });
-  //     setTasks(updateTasks);
-  //   } else {
-  //     const newTask = {
-  //       id: Date.now(),
-  //       ...formData,
-  //       // isCompleted: false,
-  //       completedDays: {},
-  //       createdAt: Date.now(),
-  //       isActive: true,
-  //     };
-  //     // setTasks([...tasks, newTask]);
-  //     setTasks((prev) => [...prev, newTask]);
-  //   }
-  //   handleClose();
-  //   console.log(tasks);
-  // };
-
   const handleClose = () => {
     setOpenModal(false);
     setSelectedTask(null);
     setMode("add");
   };
-
-  // useEffect(() => {
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // }, [tasks]);
-
-  // const handleDeletTask = (idx) => {
-  //   const updateDeleteTask = tasks.filter((ele) => {
-  //     return ele.id !== idx;
-  //   });
-  //   setTasks(updateDeleteTask);
-  //   console.log(`${idx} no task deleted`);
-  // };
 
   const handleEditTask = (task) => {
     console.log(`${task} no task edited`);

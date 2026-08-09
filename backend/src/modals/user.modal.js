@@ -10,9 +10,10 @@ const userSchema = new mongoose.Schema({
     require: true,
     unique: true,
   },
-  phone:{
-   type: String,
-   unique: true
+  username: {
+    type: String,
+    require: true,
+    unique: true,
   },
   gender: {
     type: String,
@@ -24,7 +25,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  role:{
+    type: String,
+    enum : ['user', 'admin'],
+    default : 'user'
+  }
 });
 
 const userModal = mongoose.model("auth", userSchema);
 module.exports = userModal;
+

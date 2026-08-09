@@ -5,6 +5,7 @@ import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // base: '/task_management_webapp/',
   resolve: {
     alias: {      
       // 📢✨✅ [ Now only use for logo on navbar, but in future we can use it for all]
