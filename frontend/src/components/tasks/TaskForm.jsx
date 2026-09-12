@@ -2,11 +2,13 @@ import "./task.css";
 import { useEffect, useState } from "react";
 
 const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
+  const today = new Date().toLocaleDateString("en-US", {weekday: "long"});
+
   const initialFormData = {
     title: "",
     category: "health",
     note: "",
-    days: [],
+    days: [today], // set the default selected day to today.
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -33,8 +35,10 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // onSubmitTask(formData);
+    if(formData.days.length === 0){
+      alert("please select at least one day");
+      return;
+    }
 
     if (mode === "edit") {
       onEditTask(formData);
@@ -42,7 +46,6 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
       onSubmitTask(formData);
     }
 
-    // /*setTasks([...tasks, formData]);*/ [Demo]
     setFormData(initialFormData);
     // console.log(tasks);
   };
@@ -165,7 +168,6 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
                 name="day"
                 onChange={handleCheckboxChange}
                 checked={formData.days.includes("Monday")}
-                required
               />
               <span>M</span>
             </div>
@@ -232,20 +234,6 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
           </div>
         </div>
 
-        {/* <FormControl fullWidth className="checkbox-group" required>
-          <FormLabel>Select Days:</FormLabel>
-          <FormGroup row>
-            <FormControlLabel control={<Checkbox />} label="M" />
-            <FormControlLabel control={<Checkbox />} label="T" />
-            <FormControlLabel control={<Checkbox />} label="W" />
-
-            <FormControlLabel control={<Checkbox />} label="T" />
-            <FormControlLabel control={<Checkbox />} label="F" />
-            <FormControlLabel control={<Checkbox />} label="S" />
-            <FormControlLabel control={<Checkbox />} label="S" />
-          </FormGroup>
-        </FormControl> */}
-
         <div className="form-group">
           <label htmlFor="desc">Task Description</label>
           <textarea
@@ -267,3 +255,7 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
   );
 };
 export default TaskForm;
+
+
+
+// I have attache my code snippet for TasForm.jsx file. here also exist for desktop shown day like Mon, Tues....Sun but for mobile view It Days are displaying first letter like M, T, W, .... S. So now i want to apply feature what alredy you send the code just before so now tell me where i modified and also meantion why this I modified. 

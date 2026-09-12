@@ -19,7 +19,6 @@ const authUser = async (req, res, next) => {
     }
     req.user = decoded;
     next();
-    s;
   } catch (err) {
     console.log(err);
     res.status(401).json({
@@ -27,11 +26,11 @@ const authUser = async (req, res, next) => {
     });
   }
 
-  // const user = await userModal.findOne({
-  //     $or:[
-  //         {username}, {email}, {phone}
-  //     ]
-  // });
+  const user = await userModal.findOne({
+      $or:[
+          {username}, {email}, {phone}
+      ]
+  });
 };
 
 module.exports = { authUser };

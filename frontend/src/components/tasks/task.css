@@ -5,23 +5,7 @@
   border-radius: 12px;
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); */
 }
-.form-group > label {
-  display: block;
-  margin-bottom: 5px;
-  color: #737373;
-}
 
-.form-group {
-  margin-bottom: 12px;
-  display: flex;
-  flex-direction: column;
-}
-.form-group .input-cls,
-.form-group textarea {
-  padding: 10px 12px;
-  border-radius: 3px;
-  border: 1px solid #c9c9c9;
-}
 
 .radio-group {
   display: flex;
@@ -48,7 +32,6 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5px;
-  color: #737373;
 }
 .all-days-checkbox {
   display: flex;
@@ -56,7 +39,8 @@
 }
 .checkbox-group {
   position: relative;
-  color: #979797;
+  color: var(--text-secondary);
+  
   font-weight: 500;
 }
 .checkbox-group input[type="checkbox"] {
@@ -82,15 +66,15 @@
   width: 27px;
   height: 27px;
   display: inline-block;
-  border: 1.8px solid #979797;
+  border: 1.8px solid var(--input-border);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .checkbox-group input[type="checkbox"]:checked + span {
-  border-color: #499a90;
-  color: #499a90;
+  border-color: var(--input-focus);
+  color: var(--input-focus);
 }
 .butn-cls {
   padding: 12px 16px;

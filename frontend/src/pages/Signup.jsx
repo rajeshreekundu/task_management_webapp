@@ -1,7 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import FormField from "../components/ui/FormField";
-import Login from "./Login";
 import { useState } from "react";
+import axios from "axios";
+import Button from "../components/ui/Button";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -9,16 +10,32 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const formSubmit = (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !email || !password) {
       alert("All fields are required");
       return;
     }
-    useNavigate;
-    console.log("Form submitted successfully");
-    navigate("/");
+
+    const signupFormData = {
+      name: name,
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/create",
+        signupFormData,
+      );
+      console.log("Signup success", response.data);
+
+      navigate('/');
+      console.log("Craete Successfully User:", response.data.user);
+    } catch (err) {
+      console.log(`Signup Error ${err}`);
+    }
   };
   return (
     <div className="auth-page">
@@ -55,7 +72,8 @@ const Signup = () => {
               setPassword(e.target.value);
             }}
           />
-          <button className="auth-butn">Register</button>
+          <Button btn={{ text: "Register", className: "auth-butn" }} />
+          {/* <button className="auth-butn">Register</button> */}
         </form>
         <p className="auth-botom-text">
           Already have an account? <Link to="/">Login</Link>
@@ -66,3 +84,6 @@ const Signup = () => {
 };
 
 export default Signup;
+
+
+// I tried to integrate /create API, kindly check its okay or not

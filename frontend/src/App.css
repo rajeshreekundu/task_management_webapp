@@ -1,18 +1,10 @@
 :root {
   --full-100: 100%;
   /* --theme-green-color : #267669; */
-  --theme-green-color: #267671;
-  --theme-yellow-color: #e1c13f;
-
-  /* --dark-bg: #242424;
-  --light-text: #ffffffde;
-  --dark-color: #313131; */
-
-  /* --text-- */
+  /* --theme-green-color: #267671;
+  --theme-yellow-color: #e1c13f; */
 
   height: var(--full-100);
-  /* background-color: var(--dark-bg);
-  color: var(--light-text); */
 }
 
 #root {
@@ -26,12 +18,95 @@ body {
   height: var(--full-100);
 }
 
+/* ========= Theme Colors ========= */
+
 :root {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --card-bg: #f5f5f5;
+  /* Brand / Primary */
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --accent: #14b8a6;
+
+  /* Secondary */
+  --primary-secondary: #d5b11d;
+
+  /* Background */
+  --background: #0f172a;
+  --surface: #1e293b;
+  --surface-hover: #334155;
+
+  /* Text */
+  --text: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  /* Border */
+  --border: #334155;
+  --border-hover: #475569;
+  --card-border: #5f6a78;
+
+  /* Status */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #38bdf8;
+
+  /* Input */
+  --input-background: #1e293b;
+  --input-border: #334155;
+  --input-focus: #14b8a6;
+
+  /* Overlay */
+  --overlay: rgb(0 0 0 / 60%);
+
+  /* Shadow */
+  --shadow: rgb(0 0 0 / 25%);
 }
+
+/* ======== Light Theme ======== */
+
 .light {
+  /* Brand / Primary
+     Same colors as Dark Theme */
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --accent: #14b8a6;
+
+  /* Background */
+  --background: #f8fafc;
+  --surface: #ffffff;
+  --surface-hover: #f1f5f9;
+
+  /* Text */
+  --text: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+
+  /* Border */
+  --border: #e2e8f0;
+  --border-hover: #cbd5e1;
+  --card-border: #c1c5ca;
+
+  /* Status */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #0ea5e9;
+
+  /* Input */
+  --input-background: #ffffff;
+  --input-border: #e2e8f0;
+  --input-focus: #0d9488;
+
+  /* Overlay */
+  --overlay: rgb(15 23 42 / 50%);
+
+  /* Shadow */
+  --shadow: rgb(15 23 42 / 8%);
+
+  /* card-color for light: #dbe2e4, #dce0df */
+}
+
+/* .light {
   --bg-color: #ffffff;
   --text-color: #000000;
   --card-bg: #fff;
@@ -46,9 +121,9 @@ body {
   --label-color: #d1d1d1;
   --card-border: #4b4b4b;
   --card-shadow: 0 0 20px 0 #c6c6c615;
-}
+} */
 .tm-app {
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--background);
+  color: var(--text);
   height: var(--full-100);
 }
