@@ -1,8 +1,10 @@
+import FormField from "../ui/FormField";
 import "./task.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
-  const today = new Date().toLocaleDateString("en-US", {weekday: "long"});
+  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const [taskSubmit, setTaskSubmit] = useState(false);
 
   const initialFormData = {
     title: "",
@@ -11,19 +13,20 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
     days: [today], // set the default selected day to today.
   };
 
-  const [formData, setFormData] = useState(initialFormData);
-
-  useEffect(() => {
-    if (mode === "edit" && selectedTask) {
-      // setFormData({
-      //   title: selectedTask.title || "",
-      //   category: selectedTask.category || "health",
-      //   note: selectedTask.note || "",
-      //   days: selectedTask.days || [],
-      // });
-      setFormData(selectedTask);
-    }
-  }, [selectedTask, mode]);
+  const [formData, setFormData] = useState(
+    mode === "edit" && selectedTask
+      ? {
+        id: selectedTask.id,
+          title: selectedTask.title || "",
+          category: selectedTask.category || "health",
+          note: selectedTask.note || "",
+          days: selectedTask.days || [],
+        }
+      : initialFormData,
+  );
+  //
+//   console.log("selectedTask:", selectedTask);
+// console.log("formData:", formData);
 
   const inputHandleChange = (e) => {
     const { name, value } = e.target;
@@ -35,12 +38,21 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(formData.days.length === 0){
-      alert("please select at least one day");
+    setTaskSubmit(true);
+
+    if (
+      !formData.title.trim() ||
+      !formData.note.trim() ||
+      formData.days.length === 0
+    ) {
+      // alert("please select at least one day");
       return;
     }
 
+
     if (mode === "edit") {
+        console.log("Updated form data:", formData);
+
       onEditTask(formData);
     } else {
       onSubmitTask(formData);
@@ -49,6 +61,7 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
     setFormData(initialFormData);
     // console.log(tasks);
   };
+
   const allDays = [
     "Monday",
     "Tuesday",
@@ -62,6 +75,20 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
     const { value, checked } = e.target;
     console.log(formData.days);
 
+    // 👉 Normal day logic
+    if (checked) {
+      setFormData((prev) => ({
+        ...prev,
+        days: [...prev.days, value],
+      }));
+    } else {
+      // here uncheck logic inside of else block
+      setFormData((prev) => ({
+        ...prev,
+        days: prev.days.filter((day) => day !== value),
+      }));
+    }
+
     // 👉 If "All Days" clicked
     if (value === "all") {
       setFormData((prev) => ({
@@ -70,180 +97,182 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
       }));
       return;
     }
-    // 👉 Normal day logic
-    if (checked) {
-      setFormData((prev) => ({
-        ...prev,
-        days: [...prev.days, value],
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        days: prev.days.filter((day) => day !== value),
-      }));
-    }
   };
 
   return (
     <>
       <form className="task-form" autoComplete="off" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="task">Task Title * </label>
-          <input
+          <FormField
+            label="Task Title *"
             type="text"
             value={formData.title}
             onChange={inputHandleChange}
-            name="title"
             placeholder="Enter task name"
-            className="input-cls"
-            required
+            name="title"
+            error={taskSubmit && !formData.title.trim()}
+            errorMsg="Task title is required"
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="task">Task Category *</label>
+          <label htmlFor="task">Task Category</label>
           <div className="radio-group">
-            <label htmlFor="health">
-              <input
-                type="radio"
-                value="health"
-                name="category"
-                onChange={inputHandleChange}
-                checked={formData.category === "health"}
-              />
-              Health
-            </label>
-            <label htmlFor="personal">
-              <input
-                type="radio"
-                value="personal"
-                name="category"
-                onChange={inputHandleChange}
-                checked={formData.category === "personal"}
-              />
-              Personal Life
-            </label>
-            <label htmlFor="work">
-              <input
-                type="radio"
-                value="work"
-                name="category"
-                onChange={inputHandleChange}
-                checked={formData.category === "work"}
-              />
-              Work Life
-            </label>
-            <label htmlFor="travel">
-              <input
-                type="radio"
-                value="travel"
-                name="category"
-                onChange={inputHandleChange}
-                checked={formData.category === "travel"}
-              />
-              Travel
-            </label>
+            <FormField
+              componentClass="category-radio-field"
+              label="Health"
+              type="radio"
+              value="health"
+              name="category"
+              onChange={inputHandleChange}
+              checked={formData.category === "health"}
+            />
+            <FormField
+              componentClass="category-radio-field"
+              label="Personal"
+              type="radio"
+              value="personal"
+              name="category"
+              onChange={inputHandleChange}
+              checked={formData.category === "personal"}
+            />
+
+            <FormField
+              componentClass="category-radio-field"
+              label="Work"
+              type="radio"
+              value="work"
+              name="category"
+              onChange={inputHandleChange}
+              checked={formData.category === "work"}
+            />
+            <FormField
+              componentClass="category-radio-field"
+              label="Travel"
+              type="radio"
+              value="travel"
+              name="category"
+              onChange={inputHandleChange}
+              checked={formData.category === "travel"}
+            />
           </div>
         </div>
 
         <div className="form-group">
           <div className="days-label-top">
             <label htmlFor="task">Task Days *</label>
-            <label>
-              <input
-                type="checkbox"
-                value="all"
-                onChange={handleCheckboxChange}
-                checked={formData.days.length === 7}
-              />
-              All Days
-            </label>
+            <FormField
+              componentClass="allday-checkbox-field"
+              label="All Days"
+              type="checkbox"
+              value="all"
+              onChange={handleCheckboxChange}
+              checked={formData.days.length === 7}
+            />
           </div>
 
           <div className="all-days-checkbox">
             <div className="checkbox-group">
-              <input
+              <FormField
+                componentClass=""
                 type="checkbox"
                 value="Monday"
                 name="day"
                 onChange={handleCheckboxChange}
                 checked={formData.days.includes("Monday")}
-              />
-              <span>M</span>
+              >
+                <span>M</span>
+              </FormField>
             </div>
             <div className="checkbox-group">
-              <input
+              <FormField
+                componentClass=""
                 type="checkbox"
                 value="Tuesday"
                 name="day"
                 onChange={handleCheckboxChange}
                 checked={formData.days.includes("Tuesday")}
-              />
-              <span>T</span>
+              >
+                <span>T</span>
+              </FormField>
             </div>
             <div className="checkbox-group">
-              <input
+              <FormField
+                componentClass=""
                 type="checkbox"
                 value="Wednesday"
                 name="day"
                 onChange={handleCheckboxChange}
                 checked={formData.days.includes("Wednesday")}
-              />
-              <span>W</span>
+              >
+                <span>W</span>
+              </FormField>
             </div>
             <div className="checkbox-group">
-              <input
+              <FormField
+                componentClass=""
                 type="checkbox"
                 value="Thursday"
                 name="day"
                 onChange={handleCheckboxChange}
                 checked={formData.days.includes("Thursday")}
-              />
-              <span>T</span>
+              >
+                <span>T</span>
+              </FormField>
             </div>
             <div className="checkbox-group">
-              <input
+              <FormField
+                componentClass=""
                 type="checkbox"
                 value="Friday"
                 name="day"
                 onChange={handleCheckboxChange}
                 checked={formData.days.includes("Friday")}
-              />
-              <span>F</span>
+              >
+                <span>F</span>
+              </FormField>
             </div>
             <div className="checkbox-group">
-              <input
+              <FormField
+                componentClass=""
                 type="checkbox"
                 value="Saturday"
                 name="day"
                 onChange={handleCheckboxChange}
                 checked={formData.days.includes("Saturday")}
-              />
-              <span>S</span>
+              >
+                <span>S</span>
+              </FormField>
             </div>
             <div className="checkbox-group">
-              <input
+              <FormField
+                componentClass=""
                 type="checkbox"
                 value="Sunday"
                 name="day"
                 onChange={handleCheckboxChange}
                 checked={formData.days.includes("Sunday")}
-              />
-              <span>S</span>
+              >
+                <span>S</span>
+              </FormField>
             </div>
           </div>
+          {formData.days.length === 0 && taskSubmit && (
+            <p className="form-error">Please select at least one day</p>
+          )}
         </div>
 
         <div className="form-group">
-          <label htmlFor="desc">Task Description</label>
-          <textarea
-            className="input-cls"
+          <FormField
+            label="Task Description *"
             placeholder="Notes"
+            type="textarea"
             value={formData.note || ""}
             onChange={inputHandleChange}
             rows="5"
             name="note"
-            required
+            error={taskSubmit && !formData.note.trim()}
+            errorMsg="Task description is required"
           />
         </div>
         <button type="submit" className="butn-cls">
@@ -255,7 +284,3 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
   );
 };
 export default TaskForm;
-
-
-
-// I have attache my code snippet for TasForm.jsx file. here also exist for desktop shown day like Mon, Tues....Sun but for mobile view It Days are displaying first letter like M, T, W, .... S. So now i want to apply feature what alredy you send the code just before so now tell me where i modified and also meantion why this I modified. 

@@ -1,12 +1,22 @@
 const userModal = require("../modals/user.modal");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
+//
 const registerUser = async (req, res) => {
   const { name, username, email, password } = req.body;
 
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if((!email) || (!emailPattern.test(email))){
+    
+    return res.status(400).json({
+      message : 'Please enter a valid email address'
+    })
+  }
+
   const isUserExist = await userModal.findOne({
-    or: [{ username }, { email }],
+    email
+    // $or: [{ username }, { email }] 
   });
 
   if (isUserExist) {

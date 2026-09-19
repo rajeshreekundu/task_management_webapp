@@ -1,30 +1,9 @@
 .task-form {
-  /* width: 400px;
-  padding: 20px; */
-  /* background: #fff; */
   border-radius: 12px;
   /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); */
 }
 
 
-.radio-group {
-  display: flex;
-  gap: 7px 15px;
-  flex-wrap: wrap;
-}
-
-.radio-group input[type="radio"] {
-  margin: 0;
-  width: 20px;
-  height: 20px;
-  accent-color: #49998f;
-}
-
-.radio-group > label {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-}
 
 .days-label-top {
   width: 100%;
@@ -33,6 +12,9 @@
   justify-content: space-between;
   margin-bottom: 5px;
 }
+.days-label-top label{
+  margin-bottom: 0;
+}
 .all-days-checkbox {
   display: flex;
   gap: 18px;
@@ -40,7 +22,7 @@
 .checkbox-group {
   position: relative;
   color: var(--text-secondary);
-  
+
   font-weight: 500;
 }
 .checkbox-group input[type="checkbox"] {
@@ -89,6 +71,16 @@
   width: 100%;
 }
 
+.category-radio-field {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  width: auto;
+  gap: 7px;
+}
+.category-radio-field label {
+  margin-bottom: 0;
+}
 /* /
 .
 .
@@ -103,7 +95,8 @@
 .
 .
 . */
-.task-form .MuiFormControlLabel-root {
+/* 15-09-26 */
+/* .task-form .MuiFormControlLabel-root {
   color: var(--label-color);
 }
 .MuiRadio-root.MuiRadio-colorPrimary.Mui-checked.MuiRadio-root.MuiRadio-colorPrimary {
@@ -156,7 +149,139 @@
   justify-content: center;
   width: auto;
   height: auto;
+} */
+
+.form-field.allday-checkbox-field {
+  width: auto;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 0;
 }
+.allday-checkbox-field .input-cls {
+  min-width: auto;
+}
+
+/* Task Card */
+.taskCard {
+  width: 320px;
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.2s ease;
+  position: relative;
+  background-color: var(--border-hover);
+  /* color: ; */
+  box-shadow: 0 0 15px 0 var(--shadow);
+}
+
+.taskCard:hover {
+  transform: translateY(-4px);
+}
+
+.taskCard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.taskCard-category {
+  background-color: #ccf7f3;
+  color: #0d9488;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.taskCard-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.icon:hover {
+  transform: scale(1.2);
+}
+
+.taskCard-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.taskCard-title {
+  font-size: 18px;
+  margin: 0;
+}
+
+.taskCard-description {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  /*---*/
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.taskCard-checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.action-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  color: var(--text-secondary);
+  background-color: transparent;
+  box-shadow: none;
+  border: 0;
+  display: flex;
+  align-items: center;
+}
+.action-icon svg {
+  font-size: 1.063rem;
+}
+
+.action-icon:hover {
+  transform: scale(1.2);
+}
+.taskCard-footer {
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 1px solid var(--card-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 5px;
+  margin-block: 0;
+}
+.taskCard-footer p {
+  margin: 0;
+}
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.task-status {
+  margin: 0;
+}
+.create-time {
+  font-size: 0.75rem;
+  color: #858585;
+  margin: 0;
+}
+
+/* Remove ⬆️ */
 
 @media (max-width: 768px) {
   .all-days-checkbox {

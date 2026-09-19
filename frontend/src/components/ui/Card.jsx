@@ -26,10 +26,6 @@ const Card = ({
   };
 
   const getTaskStatus = (task) => {
-    // const now = Date.now();
-    // const diff = now - task.createdAt;
-
-    // const hours24 = 24 * 60 * 60 * 1000;
 
     if (task.completedDays?.[selectedDay]) {
       return "Done ✅";
@@ -54,10 +50,6 @@ const Card = ({
               className="action-icon"
               onClick={() => {
                 onEdit(task);
-                // console.log(e.target);
-
-                // const btn = e.currentTarget;
-                // setTimeout(() => btn.blur(), 0);
               }}
               disabled={isDisabled(task)}
             >
@@ -89,8 +81,7 @@ const Card = ({
             </h3>
           </div>
           <p className="card-description">
-            {/* Finish building the user management dashboard with proper state
-            handling. */}
+
             {task.note}
           </p>
         </div>

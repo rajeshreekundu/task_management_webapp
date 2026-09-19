@@ -25,12 +25,12 @@
   padding: 12px 20px;
   border-bottom: 1px solid var(--border);
 }
-.modal-title-block h2{
+.modal-title-block h2 {
   margin: 0;
   color: var(--text-secondary);
-      font-weight: 600;
+  font-weight: 600;
 }
-.modal-close{
+.modal-close {
   cursor: pointer;
   border: 0;
   background: transparent;
@@ -38,24 +38,13 @@
   font-size: 22px;
   color: var(--text-secondary);
 }
-.modal-body-contain{
+.modal-body-contain {
   padding: 20px;
+}
 
-}
-/* .task_modal .MuiTypography-root.MuiDialogTitle-root {
-  padding-block: 12px;
-  border-bottom: 1px solid var(--border);
-  background-color: var(--surface);
-  color: var(--text);
-}
- .task_modal .MuiDialogContent-root {
-  padding-block: 24px;
-  padding-inline: 24px 20px;
-  background-color: var(--surface);
-} */
 /* AuthPage */
 .auth-page {
-  /* width: 25%; */
+  width: 23%;
   height: var(--full-100);
   display: flex;
   align-items: center;
@@ -65,8 +54,9 @@
   width: var(--full-100);
   border-radius: 3px;
   padding: 2rem;
-  background-color: #162038;
-  box-shadow: 0 0 20px #0000006e;
+  /* background-color: #162038; */
+  background-color: var(--surface);
+  box-shadow: 0 0 20px var(--auth-shadow);
 }
 .auth-form {
   width: var(--full-100);
@@ -77,23 +67,37 @@
 .auth-form h2 {
   color: var(--text-color);
 }
+form label {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--text-secondary);
+}
 .auth-butn {
   width: var(--full-100);
   padding: 9px 12px;
   border-radius: 3px;
   border: 0;
   cursor: pointer;
-  /* background: var(--theme-green-color);
-  color: var(--text-color); */
   font-weight: 600;
   font-size: 0.938rem;
+  margin-top: 15px;
 }
 .auth-botom-text {
   color: var(--text);
+  text-align: center;
+  font-size: 14px;
 }
 .auth-botom-text a {
   color: var(--accent);
   font-weight: 500;
+}
+.auth-content h2 {
+  margin-top: 0;
+}
+@media screen and (max-width: 1100px) {
+  .auth-page {
+    width: auto;
+  }
 }
 @media screen and (max-width: 768px) {
   .task_modal .MuiPaper-root.MuiDialog-paper {

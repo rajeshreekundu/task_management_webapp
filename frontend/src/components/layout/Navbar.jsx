@@ -1,6 +1,5 @@
 import logo from "@/assets/images/logo.svg";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import IconButton from "@mui/material/IconButton";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { useContext } from "react";
@@ -8,6 +7,8 @@ import { ThemeContext } from "../../contexts/index";
 import UserMenu from "./UserMenu";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { LogOut, Sun, Moon } from 'lucide-react';
+
 
 function Navbar({ openDialog }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -26,6 +27,7 @@ function Navbar({ openDialog }) {
       console.log(`Logout error ${err}`);
     }
   };
+  console.log("Theme:", theme);
 
   return (
     <div className="navbar-wrap">
@@ -46,20 +48,19 @@ function Navbar({ openDialog }) {
           <AddCircleIcon titleAccess="Add Task" />
         </button>
         <button className="icon-btn" onClick={toggleTheme}>
-          {theme ? (
-            <LightModeOutlinedIcon titleAccess="Dark Theme" />
+          {theme === 'dark' ? (
+            <Moon titleAccess="Dark Theme" />
           ) : (
-            <DarkModeOutlinedIcon titleAccess="Light Theme" />
+            <Sun titleAccess="Light Theme" />
           )}
         </button>
         <UserMenu user={{ avatar: true, avatarText: "M" }}>
           <li onClick={handleLogout}>
-            Logout
+            <LogOut size={15}/> Logout
           </li>
-           <li>
-            {/* <img src="" alt="" /> */}
+           {/* <li>
             <Link>Profile</Link>
-          </li>
+          </li> */}
         </UserMenu>
       </div>
     </div>

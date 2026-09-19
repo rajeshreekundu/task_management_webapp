@@ -1,6 +1,8 @@
-import React from "react";
+// import React, { useState } from "react";
 
 const Button = ({btn, disabled, loading,  ...props}) => {
+  // const [isLoading, setIsLoading] = useState();
+
   return (
     <button
       type={btn.type}

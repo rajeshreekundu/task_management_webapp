@@ -1,23 +1,24 @@
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-import Card from "../ui/Card";
+// import Sidebar from "./Sidebar";
+// import Card from "../ui/Card";
 import "./layout.css";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import TaskList from "../tasks/TaskList";
 
 const MainLayout = ({
   openDialog,
   tasks,
   taskDelete,
   editTask,
-  value,
-  onChange,
+  // value,
+  // onChange,
   selectedDay,
   setSelectedDay,
   handleCompleteTask,
 }) => {
-  const filteredTasks = tasks.filter((task) => {
-    return Array.isArray(task.days) && task.days.includes(selectedDay);
-  });
+  // const filteredTasks = tasks.filter((task) => {
+  //   return Array.isArray(task.days) && task.days.includes(selectedDay);
+  // });
   const days = [
     "Monday",
     "Tuesday",
@@ -36,15 +37,6 @@ const MainLayout = ({
         <main className="main_content">
           <h1>Total Tasks {tasks.length}</h1>
           <div className="day-filter">
-            {/* <button
-              onClick={() => {
-                const day = 'Monday';
-                setSelectedDay(day);
-                console.log(day);
-              }}
-            >
-              Mon
-            </button> */}
             {days.map((day) => (
               <button
                 key={day}
@@ -56,7 +48,7 @@ const MainLayout = ({
               </button>
             ))}
           </div>
-          {filteredTasks.length >= 1 ? (
+          {/* {filteredTasks.length >= 1 ? (
             <div className="tasks-card-list">
               {[...filteredTasks].reverse().map((ele, idx) => {
                 return (
@@ -75,7 +67,14 @@ const MainLayout = ({
             </div>
           ) : (
             <div>No Task Found</div>
-          )}
+          )} */}
+          <TaskList
+            tasks = {tasks}
+            taskDelete={taskDelete}
+            editTask={editTask}
+            selectedDay={selectedDay}
+            handleCompleteTask={handleCompleteTask}
+          />
         </main>
       </div>
     </div>

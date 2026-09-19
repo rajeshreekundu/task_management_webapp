@@ -25,15 +25,14 @@ const Dashboard = () => {
     setMode("add");
     setSelectedTask(null); //reset
     setOpenModal(true);
-    console.log('open');
-    
+    console.log("open");
   };
 
   const handleClose = () => {
     setOpenModal(false);
     setSelectedTask(null);
     setMode("add");
-    console.log('closse');
+    console.log("closse");
   };
 
   const handleEditTask = (task) => {
@@ -53,8 +52,6 @@ const Dashboard = () => {
 
     setTasks(updatedTasks);
 
-    setSelectedTask(null);
-    setMode("add");
     handleClose();
   };
 
@@ -92,7 +89,6 @@ const Dashboard = () => {
         selectedDay={selectedDay}
         setSelectedDay={setSelectedDay}
         handleCompleteTask={handleCompleteTask}
-        // updateTask= {updateTask}
       />
       <ModalUI
         open={openModal}
