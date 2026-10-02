@@ -1,6 +1,7 @@
 import FormField from "../ui/FormField";
 import "./task.css";
 import { useState } from "react";
+import Button from "../ui/Button";
 
 const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
@@ -16,7 +17,7 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
   const [formData, setFormData] = useState(
     mode === "edit" && selectedTask
       ? {
-        id: selectedTask.id,
+          id: selectedTask.id,
           title: selectedTask.title || "",
           category: selectedTask.category || "health",
           note: selectedTask.note || "",
@@ -25,8 +26,8 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
       : initialFormData,
   );
   //
-//   console.log("selectedTask:", selectedTask);
-// console.log("formData:", formData);
+  //   console.log("selectedTask:", selectedTask);
+  // console.log("formData:", formData);
 
   const inputHandleChange = (e) => {
     const { name, value } = e.target;
@@ -49,9 +50,8 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
       return;
     }
 
-
     if (mode === "edit") {
-        console.log("Updated form data:", formData);
+      console.log("Updated form data:", formData);
 
       onEditTask(formData);
     } else {
@@ -275,10 +275,14 @@ const TaskForm = ({ onSubmitTask, selectedTask, mode, onEditTask }) => {
             errorMsg="Task description is required"
           />
         </div>
-        <button type="submit" className="butn-cls">
-          {mode === "edit" ? "Update Task" : "Add Task"}
-          {/* Add task */}
-        </button>
+
+        <Button
+          btn ={{
+            type: 'submit',
+            text : mode === 'edit' ? 'Update Task' : 'Add Task',
+            variant: "primary",
+          }}
+        />
       </form>
     </>
   );

@@ -1,139 +1,3 @@
-/* .card {
-  width: 320px;
-  border-radius: 12px;
-  padding: 16px;
-  transition: transform 0.2s ease;
-  position: relative;
-  background-color: var(--border-hover);
-  box-shadow: 0 0 15px 0 var(--shadow);
-}
-
-.card:hover {
-  transform: translateY(-4px);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.card-category {
-  background-color: #ccf7f3;
-  color: #0d9488;
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-.card-actions {
-  display: flex;
-  gap: 5px;
-}
-
-.icon {
-  cursor: pointer;
-  font-size: 16px;
-  transition: transform 0.2s ease;
-}
-
-.icon:hover {
-  transform: scale(1.2);
-}
-
-.card-title-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.card-title {
-  font-size: 18px;
-  margin: 0;
-}
-
-.card-description {
-  margin-top: 8px;
-  font-size: 14px;
-  color: var(--text-secondary);
-
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-.card-checkbox {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-.action-icon {
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  color: var(--text-secondary);
-  background-color: transparent;
-  box-shadow: none;
-  border: 0;
-  display: flex;
-  align-items: center;
-}
-.action-icon svg {
-  font-size: 1.063rem;
-}
-
-.action-icon:hover {
-  transform: scale(1.2);
-}
-.card-footer {
-  padding-top: 10px;
-  margin-top: 10px;
-  border-top: 1px solid var(--card-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px 5px;
-  margin-block: 0;
-}
-.card-footer p {
-  margin: 0;
-}
-.disabled {
-  opacity: 0.5;
-  pointer-events: none;
-}
-.task-status {
-  margin: 0;
-}
-.create-time {
-  font-size: 0.75rem;
-  color: #858585;
-  margin: 0;
-} */
-
-/* Remove ⬆️ */
-
-
-/* .MuiDialogTitle-root {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.card.Mui-disabled::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: #a2ffca45;
-  position: absolute;
-  left: 0;
-  top: 0;
-  border-radius: 12px;
-} */
-
 /* Input Fields */
 .form-field {
   /* width: 100%; */
@@ -213,13 +77,13 @@ input::-webkit-inner-spin-button {
 /* Button */
 .butn {
   display: block;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   gap: 8px;
 
   padding: 10px 16px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: 3px;
 
   font-size: 14px;
   font-weight: 500;
@@ -242,6 +106,7 @@ input::-webkit-inner-spin-button {
   background: var(--primary);
   color: #ffffff;
   border-color: var(--primary);
+  width: 100%;
 }
 
 .butn-primary:hover:not(:disabled) {
@@ -260,6 +125,14 @@ input::-webkit-inner-spin-button {
 .butn-secondary:hover:not(:disabled) {
   background: var(--surface-hover);
   border-color: var(--primary);
+}
+
+.butn.butn-ghost {
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  line-height: normal;
+  color: var(--text-secondary);
 }
 
 /* Icon */

@@ -3,15 +3,18 @@ const jwt = require("jsonwebtoken");
 
 const authUser = async (req, res, next) => {
   const token = req.cookies.token;
-
+  // console.log("Logout/Auth middleware token:", token);
+  
   if (!token) {
-    res.status(403).json({
+    return res.status(403).json({
       message: "Unauthorized User!!",
     });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log("Decoded Token:", decoded);
+
     if (decoded.role === "admin") {
       return res.status(403).json({
         message: `You don't have an access.`,
@@ -26,11 +29,10 @@ const authUser = async (req, res, next) => {
     });
   }
 
-  const user = await userModal.findOne({
-      $or:[
-          {username}, {email}, {phone}
-      ]
-  });
+  // const user = await userModal.findOne({
+  //   email
+  //   // $or: [{ username }, { email }, { phone }],
+  // });
 };
 
 module.exports = { authUser };

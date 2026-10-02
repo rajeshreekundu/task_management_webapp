@@ -48,26 +48,6 @@ const MainLayout = ({
               </button>
             ))}
           </div>
-          {/* {filteredTasks.length >= 1 ? (
-            <div className="tasks-card-list">
-              {[...filteredTasks].reverse().map((ele, idx) => {
-                return (
-                  <Card
-                    task={ele}
-                    key={ele.id}
-                    onDelete={taskDelete}
-                    onEdit={editTask}
-                    handleCompleteTask={handleCompleteTask}
-                    selectedDay={selectedDay}
-                    on
-                    // onEdit={() => editTask(ele, idx)}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            <div>No Task Found</div>
-          )} */}
           <TaskList
             tasks = {tasks}
             taskDelete={taskDelete}

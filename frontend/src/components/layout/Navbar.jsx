@@ -1,32 +1,35 @@
 import logo from "@/assets/images/logo.svg";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/index";
 import UserMenu from "./UserMenu";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { LogOut, Sun, Moon } from 'lucide-react';
-
+import { LogOut, Sun, Moon, CirclePlus  } from "lucide-react";
+import { AuthContext } from "../../contexts/index";
+import Button from "../ui/Button";
 
 function Navbar({ openDialog }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const navigate = useNavigate();
-  const handleLogout = async () => {
-    try {
-      const res = await axios.post(
-        "http://localhost:3000/api/auth/logout",
-        {},
-        { withCredentials: true }
-      );
+  const { user, handleLogout } = useContext(AuthContext);
 
-      console.log(res.data);
-      navigate("/"),  { replace: true };
+  console.log("Navbar User:", user);
+
+  const navigate = useNavigate();
+  const logoutUser = async () => {
+    try {
+      const result = await handleLogout();
+
+      console.log("123" + result.success);
+
+      if (result.success) {
+        console.log("Logout success - navigating to login");
+        navigate("/", { replace: true });
+      }
     } catch (err) {
       console.log(`Logout error ${err}`);
     }
   };
+
+  //
   console.log("Theme:", theme);
 
   return (
@@ -36,31 +39,47 @@ function Navbar({ openDialog }) {
       </div>
 
       <div style={{ display: "flex" }}>
-        <button
-          className="icon-btn task-add"
+        <Button
+          btn={{
+            variant: "ghost",
+            icon: <CirclePlus  titleAccess="Add Task" />,
+            className: "icon-btn task-add",
+          }}
           aria-label="Add"
           size="small"
           onClick={(e) => {
             openDialog();
             e.currentTarget.blur();
           }}
-        >
-          <AddCircleIcon titleAccess="Add Task" />
-        </button>
-        <button className="icon-btn" onClick={toggleTheme}>
-          {theme === 'dark' ? (
-            <Moon titleAccess="Dark Theme" />
-          ) : (
-            <Sun titleAccess="Light Theme" />
-          )}
-        </button>
-        <UserMenu user={{ avatar: true, avatarText: "M" }}>
-          <li onClick={handleLogout}>
-            <LogOut size={15}/> Logout
+        />
+
+        <Button
+          btn={{
+            variant: "ghost",
+            icon:
+              theme === "dark" ? (
+                <Moon titleAccess="Dark Theme" />
+              ) : (
+                <Sun titleAccess="Light Theme" />
+              ),
+          }}
+          className="icon-btn"
+          aria-label="Toggle theme"
+          onClick={toggleTheme}
+        />
+        <UserMenu user={{ avatar: true, avatarText: user?.name
+          ?.split(" ").map((word)=>{
+            return word.charAt(0);
+          })
+          .join("")
+          .toUpperCase()
+          }}>
+          <p>
+            Hello, {user.name}
+          </p>
+          <li onClick={logoutUser}>
+            <LogOut size={15} /> Logout
           </li>
-           {/* <li>
-            <Link>Profile</Link>
-          </li> */}
         </UserMenu>
       </div>
     </div>
@@ -68,9 +87,3 @@ function Navbar({ openDialog }) {
 }
 
 export default Navbar;
-
-
-
-/**
- * when i click on logout menu in console it display Successfully logout, and rediect to login page but when i click browser back option it will again display dashboard ui i think with same user after that again i click logout menu it will show error on console how to fix, and prevent after logout not to possible to display dashbaord ui 
- */

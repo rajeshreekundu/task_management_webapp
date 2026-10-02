@@ -4,17 +4,16 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
       // minLength:  [3, "Name Must Contain At Least 3 Character!"]
     },
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     username: {
       type: String,
-      require: true,
       unique: true,
     },
     gender: {
@@ -25,7 +24,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      require: true,
+      required: true,
       // minLength:  [4, "Password Must Contain At Least 4 Character!"]
     },
     role: {

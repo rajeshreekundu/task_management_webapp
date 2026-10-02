@@ -1,13 +1,15 @@
-// login.jsx file code
+// Done, that is my login.jsx file code i attached for your review
 
 import { Link, useNavigate } from "react-router-dom";
 import FormField from "../components/ui/FormField";
-import { useState } from "react";
-import axios from "axios";
+import { useState, useContext } from "react";
 import Button from "../components/ui/Button";
 import AlertMessage from "../components/ui/AlertMessage";
+import { AuthContext } from "../contexts";
 
 const Login = () => {
+  const { handleLogin } = useContext(AuthContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginSubmitted, setLoginSubmitted] = useState();
@@ -30,55 +32,39 @@ const Login = () => {
       return;
     }
     setIsLoading(true);
-    const loginFormData = {
-      email: email,
-      password: password,
-    };
 
+    //
     try {
       // await new Promise((resolve) => setTimeout(resolve, 20000));  // ➡️Temporary delay for testing loading state
-      const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
-        loginFormData,
-        { withCredentials: true },
-      );
-      console.log(`Login Success ${response.data}`);
+      const result = await handleLogin(email, password);
 
-      // for get current user data after login::
-      const userResponse = await axios.get(
-        "http://localhost:3000/api/auth/me",
-        { withCredentials: true },
-      );
-      console.log("Current User:", userResponse.data);
+      if (result.success) {
+        setIsLoading(false);
+        navigate("/dashboard");
+      } else {
+        setIsLoading(false);
 
-      setIsLoading(false); //for loading
-
-      navigate("/dashboard");
-      console.log("Current User:", userResponse.data.user);
-    } catch (err) {
-      console.log(`Login Error ${err}`);
-      setIsLoading(false);
-
-      // For display error sms during login
-      setMsg({
-        type: "error",
-        text: err.response?.data?.message || "Unable to connect to server",
-      });
-      setPassword("");
-      //For clear
-      setTimeout(() => {
-        console.log("Closing message...");
-        setMsgClosing(true);
+        setMsg({
+          type: "error",
+          // text : 'Invalid user or password'
+          text: result.message // from AuthProvider.jsx mention message inside of catch block
+        });
 
         setTimeout(() => {
-          setMsg({
-            type: "",
-            text: "",
-          });
+          setMsgClosing(true);
+          setTimeout(() => {
+            setMsg({
+              type: "",
+              text: "",
+            });
+            setMsgClosing(false);
+          }, 300);
+        }, 3000);
 
-          setMsgClosing(false);
-        }, 300);
-      }, 3000);
+        setPassword("")
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -120,7 +106,6 @@ const Login = () => {
 
           {msg.type && (
             <AlertMessage
-              // type="success" message="Login successful"
               type={msg.type}
               message={msg.text}
               closing={msgClosing}
@@ -129,12 +114,12 @@ const Login = () => {
 
           <Button
             btn={{
+              type: 'submit',
               text: "Login",
               className: "auth-butn",
               variant: "primary",
-              
             }}
-            loading = {isLoading}
+            loading={isLoading}
           />
         </form>
 

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import "./ui.css"
+import "./ui.css";
+import Button from "./Button";
 
 const FormField = ({
   componentClass,
@@ -12,7 +13,6 @@ const FormField = ({
   errorMsg,
   children,
   ...props
-  
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -34,16 +34,18 @@ const FormField = ({
             type={type === "password" && showPassword ? "text" : type}
             {...props}
           />
-            {children}
+          {children}
 
           {type === "password" && (
-            <button
-              type="button"
-              className="show-hide-pass"
+
+            <Button
+              btn={{
+                variant: "ghost",
+                className: "show-hide-pass",
+                icon: showPassword ? <EyeOff size={13} /> : <Eye size={13} />,
+              }}
               onClick={() => setShowPassword((prev) => !prev)}
-            >
-              {showPassword ? <EyeOff size={13} /> : <Eye size={13} />}
-            </button>
+            />
           )}
         </>
       )}
@@ -53,7 +55,3 @@ const FormField = ({
 };
 
 export default FormField;
-
-// In console this error is show
-// Button.jsx:6 Uncaught TypeError: Cannot read properties of undefined (reading 'type')
-//     at Button (Button.jsx:6:17)

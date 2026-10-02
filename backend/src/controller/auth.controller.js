@@ -23,6 +23,18 @@ const registerUser = async (req, res) => {
     return res.status(409).json({ message: "User already exists!!" });
   }
 
+  if(!name || name.length < 3){
+    return res.status(400).json({
+      message: "Name must contain at least 3 characters."
+    })
+  }
+
+  if(!password || password.length < 4){
+    return res.status(400).json({
+      message: "Password must contain at least 4 characters."
+    })
+  }
+
   const hash = await bcrypt.hash(password, 10);
 
   const user = await userModal.create({

@@ -85,71 +85,8 @@
 .
 .
 .
-.
-.
-.
-.
-.
-.
-.
-.
-.
 . */
-/* 15-09-26 */
-/* .task-form .MuiFormControlLabel-root {
-  color: var(--label-color);
-}
-.MuiRadio-root.MuiRadio-colorPrimary.Mui-checked.MuiRadio-root.MuiRadio-colorPrimary {
-  color: var(--theme-green-color);
-}
 
-.MuiCheckbox-root + .MuiFormControlLabel-label {
-  position: absolute;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  right: 0;
-  color: #8b8a8a;
-}
-.MuiCheckbox-root.Mui-checked + .MuiFormControlLabel-label {
-  color: #267671;
-}
-
-.MuiFormControl-root.MuiFormControl-fullWidth.checkbox-group {
-  margin-bottom: 30px;
-}
-.checkbox-group .MuiFormControlLabel-root {
-  position: relative;
-  padding: 0;
-  margin-left: 0;
-  width: 27px;
-  height: 27px;
-  border: 2px solid #8b8a8a;
-  border-radius: 50%;
-}
-.MuiFormControl-root.MuiFormControl-fullWidth.checkbox-group
-  .MuiFormLabel-root {
-  padding-bottom: 9px;
-}
-.checkbox-group
-  .MuiFormControlLabel-root:has(
-    .MuiButtonBase-root.MuiCheckbox-root.Mui-checked
-  ) {
-  border-color: #267671;
-}
-.MuiButtonBase-root.MuiCheckbox-root {
-  padding: 0;
-}
-
-.checkbox-group .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium {
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: auto;
-} */
 
 .form-field.allday-checkbox-field {
   width: auto;

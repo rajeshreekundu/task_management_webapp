@@ -1,8 +1,35 @@
+/* ======== Dropdown Menu Items ======== */
+
+.dropdown-menu li {
+  margin: 0;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.dropdown-menu a {
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.dropdown-menu li:hover {
+  background-color: var(--surface-hover);
+}
+
 /*  */
 .layout_wrapper {
   height: 100%;
 }
 
+/* ======== Navbar ======== */
 .navbar-wrap {
   padding: 1.2rem 1.5rem;
   text-align: left;
@@ -21,6 +48,15 @@
   cursor: pointer;
   color: #fff;
 }
+.dropdown-menu p{
+  padding: 10px 12px;
+  margin: 0;
+  border-bottom: 1px solid var(--card-border);
+}
+.dropdown-menu li svg{
+  color: var(--text-secondary)
+}
+
 /* Main Area */
 .main_area {
   height: 100%;
@@ -140,57 +176,6 @@
   display: block;
 } */
 
-/* ======== Dropdown Menu Items ======== */
-
-.dropdown-menu li {
-  margin: 0;
-  padding: 10px 12px;
-  font-size: 14px;
-  color: var(--text);
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.dropdown-menu a {
-  color: var(--text);
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-decoration: none;
-}
-
-.dropdown-menu li:hover {
-  background-color: var(--surface-hover);
-}
-
-/* ================================
-   Dark Theme
-================================ */
-
-/* .dark .dropdown-menu {
-  background-color: #1f2937;
-  border-color: #374151;
-
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-}
-
-.dark .dropdown-avatar {
-  background-color: #374151;
-  color: #f9fafb;
-}
-
-.dark .dropdown-menu p,
-.dark .dropdown-menu li {
-  color: #f9fafb;
-}
-
-.dark .dropdown-menu p:hover,
-.dark .dropdown-menu li:hover {
-  background-color: #374151;
-} */
 
 /* ======== Mobile ======== */
 

@@ -1,6 +1,7 @@
-import { Pencil, Trash  } from 'lucide-react';
+import { Pencil, Trash } from "lucide-react";
 
 import "./task.css";
+import Button from "../ui/Button";
 
 const TaskCard = ({
   task,
@@ -9,7 +10,6 @@ const TaskCard = ({
   handleCompleteTask,
   selectedDay,
 }) => {
-
   // Convert task creation time into readable time
   const time = new Date(task.createdAt).toLocaleTimeString([], {
     hour: "2-digit",
@@ -45,21 +45,30 @@ const TaskCard = ({
         <span className="taskCard-category">{task.category}</span>
 
         <div className="taskCard-actions">
-          <button
-            className="action-icon"
+          <Button
+            btn={{
+              variant: "ghost",
+              className: "action-icon",
+              icon: (
+                <Pencil size={16} strokeWidth={2} titleAccess="Edit Task" />
+              ),
+            }}
             onClick={() => onEdit(task)}
             disabled={isDisabled(task)}
-          >
-            <Pencil size={16} strokeWidth={2}  titleAccess="Edit Task" />
-          </button>
+          />
 
-          <button
-            className="action-icon"
+          <Button
+            btn={{
+              variant: "ghost",
+              className: "action-icon",
+              icon: (
+                 <Trash size={18} strokeWidth={2} titleAccess="Delete Task" />
+              ),
+            }}
             onClick={() => onDelete(task.id)}
             disabled={isDisabled(task)}
-          >
-            <Trash size={18} strokeWidth={2} titleAccess="Delete Task" />
-          </button>
+          />
+
         </div>
       </div>
 
@@ -88,9 +97,7 @@ const TaskCard = ({
           </p>
         </div>
 
-        <p className="task-status">
-          Status: {getTaskStatus(task)}
-        </p>
+        <p className="task-status">Status: {getTaskStatus(task)}</p>
 
         <p className="create-time">{time}</p>
       </div>

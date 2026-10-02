@@ -1,8 +1,8 @@
-import Button from "./Button";
 import { useEffect } from "react";
+import Button from "./Button";
+import { X } from "lucide-react";
 
 const ModalUI = ({ modal, open, onClose }) => {
-
   useEffect(() => {
     const modalHandleChange = (evt) => {
       if (evt.key === "Escape") {
@@ -24,28 +24,19 @@ const ModalUI = ({ modal, open, onClose }) => {
             <div className="modal-title-block">
               <h2>{modal.mode === "Edit Task" ? "Edit Task" : "Add Task"}</h2>
 
-              <button
-                type="button"
-                className="modal-close"
-                onClick={onClose}
-              >
-                ×
-              </button>
-            </div>
-
-            <div className="modal-body-contain">
-              {/* 123455 */}
-              {modal.content}
-            </div>
-
-            <div className="modal-action">
-              {modal.children}
-              {/* <Button
+              <Button
                 btn={{
-                  text: modal.mode === "Edit Task" ? "Update Task" : "Add Task",
+                  variant: "ghost",
+                  className: "modal-close",
+                  icon: <X size={16} titleAccess="Close" />,
                 }}
-              /> */}
+                onClick={onClose}
+              />
             </div>
+
+            <div className="modal-body-contain">{modal.content}</div>
+
+            <div className="modal-action">{modal.children}</div>
           </div>
         </dialog>
       )}
@@ -54,5 +45,3 @@ const ModalUI = ({ modal, open, onClose }) => {
 };
 
 export default ModalUI;
-
-//// Can you check once more of ModalUI.jsx file, what should need to remove

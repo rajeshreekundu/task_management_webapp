@@ -28,7 +28,7 @@ const Signup = () => {
     if (!name || !email || !emailPattern.test(email) || !password) {
       return;
     }
-    setIsLoading(true)
+    setIsLoading(true);
 
     const signupFormData = {
       name: name,
@@ -46,7 +46,7 @@ const Signup = () => {
         text: "Register Successfully!",
       });
 
-      setIsLoading(false)
+      setIsLoading(false);
 
       setTimeout(() => {
         navigate("/");
@@ -55,7 +55,7 @@ const Signup = () => {
       //
     } catch (err) {
       console.log(`Signup Error ${err}`);
-      setIsLoading(false)
+      setIsLoading(false);
       setMsg({
         type: "error",
         text: err.response?.data?.message || "User Already Exist!",
@@ -94,8 +94,12 @@ const Signup = () => {
             onChange={(e) => {
               setName(e.target.value);
             }}
-            error={submitted && !name}
-            errorMsg="Name is required"
+            error={submitted && (!name || name.length < 3)}
+            errorMsg={
+              !name
+                ? "Name is required"
+                : "Name must contain at least 3 characters"
+            }
           />
           <FormField
             label="Email"
@@ -119,8 +123,12 @@ const Signup = () => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            error={submitted && !password}
-            errorMsg="Password is required"
+            error={submitted && (!password || password.length < 4)}
+            errorMsg={
+              !password
+                ? "Password is required"
+                : "Password must contain at least 4 characters"
+            }
           />
 
           {msg.type && (
@@ -133,6 +141,7 @@ const Signup = () => {
 
           <Button
             btn={{
+              type: "submit",
               text: "Register",
               className: "auth-butn",
               variant: "primary",

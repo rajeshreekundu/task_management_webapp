@@ -1,23 +1,33 @@
-import { useContext } from 'react'
-import './App.css'
-import Dashboard from './pages/Dashboard'
-import { ThemeContext } from './contexts/index';
-import Login from './pages/Login';
-import { Route, Routes } from 'react-router-dom';
-import Register from './pages/Signup';
+import { useContext } from "react";
+import "./App.css";
+import Dashboard from "./pages/Dashboard";
+import { ThemeContext } from "./contexts/index";
+import Login from "./pages/Login";
+import { Route, Routes } from "react-router-dom";
+import Register from "./pages/Signup";
+import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
-  const {theme} = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext);
   return (
     <div className={`tm-app ${theme}`}>
       {/* <Dashboard/> */}
       <Routes>
-        <Route path='/' element={<Login/>} />
-        <Route path='/create' element={<Register/>} />
-        <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path="/" element={<Login />} />
+        <Route path="/create" element={<Register />} />
+        {/* <Route path="/dashboard" element={<Dashboard />} /> */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
+//
